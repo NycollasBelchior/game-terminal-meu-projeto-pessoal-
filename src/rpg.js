@@ -1,4 +1,23 @@
 import leia from "readline-sync";
+let Itensloja = {
+      casas: [
+        {
+            casa: "casa pequena",
+            preco: 15000,
+            tipo: "casa"
+        },
+        {
+            casa: "casa media",
+            preco: 22500,
+            tipo: "casa"
+        },
+        {
+            casa: "casa grande",
+            preco: 35000,
+            tipo: "casa"
+        }
+      ]
+} 
 
 let jogador = {
  dinheiro : 0,
@@ -8,28 +27,22 @@ let jogador = {
  energia : 1,
  empregoatual : "desempregado",
  dias : 0,
+casas: [],
 
  cursos : {
     cursoPr : false,
-    cursoEn : false
+    cursoEn : false 
 }
 }
-
- 
-
-
-
 //---------------------
 // LOOP DO JOGO
 //---------------------
 while (true) {
-    render();
-
+    status();
     let menu = leia.keyInSelect(
-        ["trabalhar", "descansar", "empregos", "treino", "cursos"],
+        ["trabalhar", "descansar", "empregos", "treino", "cursos","loja"],
         "O que deseja? "
     );
-
     if (menu === 0) {
         trabalhar();
     } 
@@ -44,17 +57,18 @@ while (true) {
     } 
     else if (menu === 4) {
         curso();
+    }
+    else if (menu === 5){
+        menuL();
     } 
     else if (menu === -1) {
         console.log("Jogo encerrado");
         break;
     }
 }
-
 //---------------------
 // FUNÇÕES
 //---------------------
-
 function status() {
     console.log("--------------------------");
     console.log("dias: " + jogador.dias);
@@ -62,48 +76,31 @@ function status() {
     console.log("dinheiro: " + jogador.dinheiro);
     console.log("salario: " + jogador.salario);
     console.log("emprego: " + jogador.empregoatual);
+    console.log("casas: " + jogador.casas.join(" | "))
     console.log("--------------------------");
 }
-
-function render() {
-    console.clear();
-    status();
-}
-
-function pausa() {
-    leia.keyInPause("Pressione ENTER para continuar...");
-}
-
 //---------------------
 // AÇÕES
 //---------------------
-
 function trabalhar() {
     if (jogador.energia >= jogador.energiaG) {
         jogador.dinheiro += jogador.salario;
         jogador.energia -= jogador.energiaG;
         jogador.dias++;
-
         console.log("Você trabalhou e ganhou: R$" + jogador.salario);
     } else {
         console.log("Energia insuficiente!");
     }
-
-    pausa();
 }
-
 function descansar() {
     if (jogador.energia < jogador.energiamax) {
         jogador.energia++;
         console.log("Você descansou!");
+        jogador.dias++;  
     } else {
         console.log("Energia já está no máximo!");
-    }
-
-    jogador.dias++;
-    pausa();
+    }   
 }
-
 function empregos() {
     let emprego = leia.keyInSelect([
         "(R$150) pedreiro",
@@ -111,7 +108,6 @@ function empregos() {
         "(R$650) programador",
         "(R$700) engenheiro"
     ]);
-
     if (emprego === 0) {
         jogador.salario = 150;
         jogador.energiaG = 2;
@@ -153,14 +149,11 @@ function empregos() {
         }
     }
     jogador.dias++;
-    pausa();
+  
 }
-
 function treino() {
     console.log("Deseja treinar na academia por R$150? (+1 energia máxima)");
-
     let resp = leia.keyInSelect(["sim", "não"]);
-
     if (resp === 0) {
         if (jogador.dinheiro >= 150) {
             jogador.dinheiro -= 150;
@@ -175,17 +168,13 @@ function treino() {
     } else {
         console.log("Você desistiu de treinar!");
     }
-
-    jogador.dias++;
-    pausa();
+    jogador.dias++; 
 }
-
 function curso() {
     let esc = leia.keyInSelect([
         "(R$600) programação",
         "(R$550) engenharia"
     ]);
-
     if (esc === 0) {
         if (jogador.dinheiro >= 600) {
             jogador.dinheiro -= 600;
@@ -207,7 +196,46 @@ function curso() {
     else {
         console.log("Você desistiu do curso!");
     }
-
-    jogador.dias++;
-    pausa();
+    jogador.dias++; 
+}
+function menuL(){
+    console.log("============================")
+    console.log("===== bem vindo a loja =====")
+    console.log("============================")
+let opcoes = ["casas","automóveis","eletronicos"]
+let esc = leia.keyInSelect(opcoes)
+if (esc ===0){
+    let escolhacasa = leia.keyInSelect([
+        "casa pequena - 15000",
+        "casa media - 22500",
+        "casa grande - 35000"
+    ])
+    if (escolhacasa === 0){
+    if (jogador.dinheiro >= 15000){
+        jogador.dinheiro -= 15000
+        jogador.casas.push("casa pequena")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
+    else if(escolhacasa === 1){
+        if(jogador.dinheiro >= 22500){
+            jogador.dinheiro -=22500
+            jogador.casas.push("casa media")
+        }
+        else{
+            console.log("dinheiro insuficiente")
+        }
+    }
+    else if(escolhacasa===2){
+        if (jogador.dinheiro >= 35000){
+            jogador.dinheiro -=35000;
+            jogador.casas.push("casa grande")
+        }
+        else{
+        console.log("dinheiro insuficiente")
+    }
+    }
+}
 }
