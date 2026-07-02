@@ -1,23 +1,4 @@
 import leia from "readline-sync";
-let Itensloja = {
-      casas: [
-        {
-            casa: "casa pequena",
-            preco: 15000,
-            tipo: "casa"
-        },
-        {
-            casa: "casa media",
-            preco: 22500,
-            tipo: "casa"
-        },
-        {
-            casa: "casa grande",
-            preco: 35000,
-            tipo: "casa"
-        }
-      ]
-} 
 
 let jogador = {
  dinheiro : 0,
@@ -27,7 +8,8 @@ let jogador = {
  energia : 1,
  empregoatual : "desempregado",
  dias : 0,
-casas: [],
+casas: [" | "],
+automoveis: [" | "],
 
  cursos : {
     cursoPr : false,
@@ -237,5 +219,69 @@ if (esc ===0){
         console.log("dinheiro insuficiente")
     }
     }
+}
+if (esc === 1){
+    let escolhaautomoveis = leia.keyInSelect([
+        "bicicleta - 500",
+        "moto - 5000",
+        "carro ruim - 8000",
+        "carro medio - 12000",
+        "carrom bom - 20000",
+        "carro moderno - 35000"
+    ])
+if (escolhaautomoveis === 0){
+    if (jogador.dinheiro >= 500){
+        jogador.dinheiro-=500;
+        jogador.automoveis.join("bicicleta")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
+else if(escolhaautomoveis === 1){
+    if (jogador.dinheiro >= 5000){
+        jogador.dinheiro -= 5000;
+        jogador.automoveis.join("moto")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
+else if (escolhaautomoveis === 2){
+    if(jogador.dinheiro >= 12000){
+        jogador.dinheiro -= 12000;
+        jogador.automoveis.join("carro ruim")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
+else if (escolhaautomoveis === 3){
+    if(jogador.dinheiro >= 20000){
+        jogador.dinheiro -= 20000;
+        jogador.automoveis.join("carro medio")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
+else if (escolhaautomoveis === 4){
+    if(jogador.dinheiro >= 20000){
+        jogador.dinheiro -= 35000;
+        jogador.automoveis.join("carro bom")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
+else if (escolhaautomoveis === 5){
+    if(jogador.dinheiro >= 35000){
+        jogador.dinheiro -= 35000;
+        jogador.automoveis.join("carro moderno")
+    }
+    else{
+        console.log("dinheiro insuficiente")
+    }
+}
 }
 }
