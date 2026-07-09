@@ -135,11 +135,11 @@ function empregos() {
   
 }
 function treino() {
-    console.log("Deseja treinar na academia por R$150? (+1 energia máxima)");
+    console.log("Deseja treinar na academia por R$1000? (+1 energia máxima)");
     let resp = leia.keyInSelect(["sim", "não"]);
     if (resp === 0) {
-        if (jogador.dinheiro >= 150) {
-            jogador.dinheiro -= 150;
+        if (jogador.dinheiro >= 1000) {
+            jogador.dinheiro -= 1000;
             jogador.energiamax++;
             jogador.energia = jogador.energiamax;
 
@@ -155,12 +155,12 @@ function treino() {
 }
 function curso() {
     let esc = leia.keyInSelect([
-        "(R$600) programação",
-        "(R$550) engenharia"
+        "(R$2500) programação",
+        "(R$3000) engenharia"
     ]);
     if (esc === 0) {
-        if (jogador.dinheiro >= 600) {
-            jogador.dinheiro -= 600;
+        if (jogador.dinheiro >= 2500) {
+            jogador.dinheiro -= 2500;
             jogador.cursos.cursoPr = true;
             console.log("Curso de programação concluído!");
         } else {
@@ -168,8 +168,8 @@ function curso() {
         }
     } 
     else if (esc === 1) {
-        if (jogador.dinheiro >= 550) {
-            jogador.dinheiro -= 550;
+        if (jogador.dinheiro >= 3000) {
+            jogador.dinheiro -= 3000;
             jogador.cursos.cursoEn = true;
             console.log("Curso de engenharia concluído!");
         } else {
