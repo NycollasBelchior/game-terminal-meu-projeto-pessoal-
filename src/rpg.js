@@ -10,6 +10,7 @@ let jogador = {
  dias : 0,
 casas: [],
 automoveis: [],
+eletronicos: [],
 
  cursos : {
     cursoPr : false,
@@ -60,6 +61,7 @@ function status() {
     console.log("emprego: " + jogador.empregoatual);
     console.log("casas: " + jogador.casas.join(" | "))
     console.log("automoveis: " + jogador.automoveis.join(" | "))
+    console.log("eletronicos: " + jogador.eletronicos.join(" | "))
     console.log("--------------------------");
 }
 //---------------------
@@ -285,4 +287,45 @@ else if (escolhaautomoveis === 5){
     }
 }
 }
+if (esc === 2){
+    let escolhaEletronicos = leia.keyInSelect([
+        "televisão - R$2000",
+        "celular - R$1000",
+        "playstation - R$4000",
+        "setup - 5000R$",
+    ])
+
+    if(escolhaEletronicos === 0){
+        if (jogador.dinheiro >= 2000){
+            jogador.dinheiro -= 2000;
+            jogador.eletronicos.push("televisão")
+        } 
+        console.log("dinheiro insuficiente!")
+
+    }
+    else if(escolhaEletronicos ===1){
+        if(jogador.dinheiro >= 1000){
+            jogador.dinheiro -= 1000;
+            jogador.eletronicos.push("celular");
+        }
+        console.log("dinheiro insuficiente!")
+    }
+    else if(escolhaEletronicos === 2){
+        if (jogador.dinheiro >= 4000){
+            jogador.dinheiro -=4000;
+            jogador.eletronicos.push("playstation");
+        }
+        console.log("dinheiro insuficiente!")
+    }
+    else if(escolhaEletronicos === 3){
+        if(jogador.dinheiro >= 5000){
+            jogador.dinheiro -= 5000;
+            jogador.eletronicos.push("setup")
+        }
+        else{
+            console.log("dinheiro insuficiente!")
+        }
+    }
+}
+
 }
